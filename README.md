@@ -1,6 +1,6 @@
 # vagrant_multi_vm
 ### Building a Multi-Server Environment with Vagrant  
-Mini Project in Lecture 'Cloud Computing' (Seoul Women's University) 
+Mini Project in Lecture 'Cloud Computing Services Security Management' (Seoul Women's University) 
 <br/><br/>  
 
 ## 📝 Project 1_One DB Server and Two Web Server
