@@ -1,6 +1,7 @@
 # vagrant_multi_vm
 ### Building a Multi-Server Environment with Vagrant  
-<br/>
+Mini Project in Lecture 'Cloud Computing' (Seoul Women's University) 
+<br/><br/>  
 
 ## 📝 Project 1_One DB Server and Two Web Server
 Two Web servers refer to the DB tables of one DB server to manage the data, and each web server refers to a different database table.
