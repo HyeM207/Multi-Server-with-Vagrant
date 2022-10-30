@@ -1,0 +1,68 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+# Example Multi-Box edited by Jessica Rankins 4/17/2017
+
+ADDITIONALFILES_WEB1 = Dir.pwd + "/VagrantMultiAdditionalFiles1"
+ADDITIONALFILES_WEB2 = Dir.pwd + "/VagrantMultiAdditionalFiles2"
+
+  # All Vagrant configuration is done below. The "2" in Vagrant.configure
+  # configures the configuration version.
+Vagrant.configure("2") do |config|
+
+  config.vm.synced_folder Dir.pwd, "/vagrant", disabled: true
+  config.vm.box = "hashicorp/precise64"	
+
+  # Configure the Web Server1
+  config.vm.define "WebExampleBox1" do |web1|
+    web1.vm.provider :virtualbox do |vb|
+      vb.name = "WebBox1"
+      vb.memory = 1024
+      vb.customize ["modifyvm", :id, "--description", "WebBox is an apache VM used to demonstrate Infrastructure as code principles via Vagrant. It is also used to demonstrate defining multiple machines in a single Vagrantfile."]
+    end
+
+    # After vagrant up, should see VM's web page in browser at 192.168.3.5
+    web1.vm.network "private_network", ip: "192.168.3.5"
+    web1.vm.hostname = "Web1"
+    web1.vm.synced_folder ADDITIONALFILES_WEB1, "/var/www"
+    web1.vm.provision :shell, path: "web_provision.sh"
+
+    # display this message at end of vagrant up
+    config.vm.post_up_message = "Successfully started Web1."
+  end
+
+  # Configure the Web Server2
+  config.vm.define "WebExampleBox2" do |web2|
+    web2.vm.provider :virtualbox do |vb|
+      vb.name = "WebBox2"
+      vb.memory = 1024
+      vb.customize ["modifyvm", :id, "--description", "WebBox is an apache VM used to demonstrate Infrastructure as code principles via Vagrant. It is also used to demonstrate defining multiple machines in a single Vagrantfile."]
+    end
+
+    # After vagrant up, should see VM's web page in browser at 192.168.3.6
+    web2.vm.network "private_network", ip: "192.168.3.6"
+    web2.vm.hostname = "Web2"
+    web2.vm.synced_folder ADDITIONALFILES_WEB2, "/var/www"
+    web2.vm.provision :shell, path: "web_provision.sh"
+
+    # display this message at end of vagrant up
+    config.vm.post_up_message = "Successfully started Web2."
+  end
+
+
+  # Configure the Database
+  config.vm.define "DBExampleBox" do |db|
+    db.vm.provider :virtualbox do |vb|
+      vb.name = "DBBox1"
+      vb.memory = 1024
+      vb.customize ["modifyvm", :id, "--description", "DBBox is a mysql VM used to demonstrate Infrastructure as code principles via Vagrant. It is also used to demonstrate defining multiple machines in a single Vagrantfile."]
+    end
+
+    db.vm.hostname = "DB"
+    db.vm.provision :shell, path: "db_provision.sh"
+    db.vm.network "private_network", ip: "192.168.3.7"
+   
+    # display this message at end of vagrant up
+    config.vm.post_up_message = "Successfully started DB."
+  end
+  
+end    # End configuring

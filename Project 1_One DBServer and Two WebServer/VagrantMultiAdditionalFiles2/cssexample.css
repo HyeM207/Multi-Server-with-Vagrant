@@ -1,0 +1,9 @@
+h1, h2 {color: red;}
+h3, h4 {color: darkgreen; font-size: x-large}
+.success {color:green;}
+.error{color:red;}
+
+label {
+display: inline-block;
+width: 100px;
+margin-bottom: 10px;}
